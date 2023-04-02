@@ -216,7 +216,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 // musi byc bo otwiera X aktywnosci na raz
                 if (gracz1PKT == gracz2PKT) {
                     finish();
-                } else if (!activityStarted) {
+                } else if (!activityStarted){
                     mStartForResult.launch(intent2);
                     activityStarted = true;
                 }
