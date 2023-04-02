@@ -20,7 +20,9 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:freezesText="true"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:fontFamily="@font/uncial_antiqua"
+            />
 
         <Button
             android:id="@+id/button_01"
@@ -29,6 +31,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:freezesText="true"
+            android:fontFamily="@font/uncial_antiqua"
             android:textSize="60sp" />
 
         <Button
@@ -37,6 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:freezesText="true"
+            android:fontFamily="@font/uncial_antiqua"
             android:textSize="60sp" />
 
     </LinearLayout>
@@ -53,6 +57,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:freezesText="true"
+            android:fontFamily="@font/uncial_antiqua"
             android:textSize="60sp" />
 
         <Button
@@ -62,6 +67,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:freezesText="true"
+            android:fontFamily="@font/uncial_antiqua"
             android:textSize="60sp" />
 
         <Button
@@ -70,6 +76,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:freezesText="true"
+            android:fontFamily="@font/uncial_antiqua"
             android:textSize="60sp" />
 
     </LinearLayout>
