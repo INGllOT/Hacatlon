@@ -1,4 +1,4 @@
-package com.example.hacatlon;
+package com.example.hacatlon.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity3 extends AppCompatActivity {
+import com.example.hacatlon.participants.Players;
+import com.example.hacatlon.R;
+import com.example.hacatlon.database.Questions;
+
+public class QuizActivity extends AppCompatActivity {
 
     Button check, next;
     TextView result, question, playerTour;
@@ -25,7 +29,7 @@ public class MainActivity3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_quiz);
 
         check = findViewById(R.id.check);
         next = findViewById(R.id.next);
@@ -36,10 +40,10 @@ public class MainActivity3 extends AppCompatActivity {
 
         answer = findViewById(R.id.answer);
 
-        if(Players.player1win) {
+        if(Players.player1Win) {
             playerTour.setText("PLAYER 1 TOUR");
             currentQuestion = Questions.questions.get(Players.player1.getCurrentQuestion());
-            currentAnswer = Questions.anwserws.get(Players.player1.getCurrentQuestion());
+            currentAnswer = Questions.answers.get(Players.player1.getCurrentQuestion());
 
             indexOfQuestion = Questions.questions.indexOf(currentQuestion);
             question.setText(currentQuestion);
@@ -47,7 +51,7 @@ public class MainActivity3 extends AppCompatActivity {
         } else {
             playerTour.setText("PLAYER 2 TOUR");
             currentQuestion = Questions.questions.get(Players.player2.getCurrentQuestion());
-            currentAnswer = Questions.anwserws.get(Players.player2.getCurrentQuestion());
+            currentAnswer = Questions.answers.get(Players.player2.getCurrentQuestion());
 
             indexOfQuestion = Questions.questions.indexOf(currentQuestion);
             question.setText(currentQuestion);
@@ -57,13 +61,13 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(Players.player1win) {
+                if(Players.player1Win) {
                   //  System.out.println(Players.player1.currentQuestion + " " + Questions.questions.size());
                     if(currentAnswer.equals(answer.getText().toString())) {
                         System.out.println(currentQuestion);
                         System.out.println(currentAnswer);
                         result.setText("RIGHT !!!");
-                        Players.player1.anwseredQuestion.add(indexOfQuestion);
+                        Players.player1.answeredQuestion.add(indexOfQuestion);
                         Players.player1.addPoint();
                         System.out.println(Players.player1.getPlayerPoints());
                     } else {
@@ -78,7 +82,7 @@ public class MainActivity3 extends AppCompatActivity {
                         result.setText("RIGHT !!!");
                         System.out.println(currentQuestion);
                         System.out.println(currentAnswer);
-                        Players.player2.anwseredQuestion.add(indexOfQuestion);
+                        Players.player2.answeredQuestion.add(indexOfQuestion);
                         Players.player2.addPoint();
                         System.out.println(Players.player2.getPlayerPoints());
                     } else {

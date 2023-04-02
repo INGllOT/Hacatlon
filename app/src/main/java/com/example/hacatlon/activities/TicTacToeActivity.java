@@ -1,4 +1,4 @@
-package com.example.hacatlon;
+package com.example.hacatlon.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -17,9 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hacatlon.participants.Players;
+import com.example.hacatlon.R;
+
 import java.util.Random;
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
+public class TicTacToeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] buttons = new Button[3][3];
 
@@ -47,7 +50,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_tictactoe);
 
         textViewGracz1 = findViewById(R.id.text_view_p1);
         textViewGracz2 = findViewById(R.id.text_view_p2);
@@ -202,15 +205,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 time.setText("koniec!");
 
                 if (gracz1PKT > gracz2PKT){
-                    Players.player1win = true;
+                    Players.player1Win = true;
                     //gracz1RUNDA ++;
                 }
                 else {
-                    Players.player1win = false;
+                    Players.player1Win = false;
                    // gracz2RUNDA ++;
                 }
 
-                System.out.println(Players.player1win);
+                System.out.println(Players.player1Win);
 
                 // przekazywanie danych do 1 aktywności
 //                Intent intent = new Intent();
@@ -219,7 +222,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
               //  setResult(Activity.RESULT_OK, intent);
 
-                Intent intent2 = new Intent(MainActivity2.this, MainActivity3.class);
+                Intent intent2 = new Intent(TicTacToeActivity.this, QuizActivity.class);
 
 
                 // musi byc bo otwiera X aktywnosci na raz

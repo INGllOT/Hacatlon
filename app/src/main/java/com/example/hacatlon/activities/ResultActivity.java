@@ -1,4 +1,4 @@
-package com.example.hacatlon;
+package com.example.hacatlon.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity4 extends AppCompatActivity {
+import com.example.hacatlon.participants.Players;
+import com.example.hacatlon.R;
+
+public class ResultActivity extends AppCompatActivity {
 
     TextView result;
     Button playAgain;
@@ -17,7 +20,7 @@ public class MainActivity4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_result);
 
         result = findViewById(R.id.winner);
         playAgain = findViewById(R.id.playagain);

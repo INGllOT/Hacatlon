@@ -1,13 +1,15 @@
-package com.example.hacatlon;
+package com.example.hacatlon.participants;
 
-import java.util.HashMap;
+import com.example.hacatlon.database.Questions;
+
 import java.util.HashSet;
+import java.util.Set;
 
 public class Player {
 
     public int playerId;
     public int playerPoints;
-    public HashSet<Integer> anwseredQuestion = new HashSet<>();
+    public Set<Integer> answeredQuestion = new HashSet<>();
     public int currentQuestion;
     int random_int;
 
@@ -33,7 +35,7 @@ public class Player {
         for(;;) {
              random_int = randomNum();
             //System.out.println("question number " + random_int);
-            if(!anwseredQuestion.contains(random_int)){
+            if(!answeredQuestion.contains(random_int)){
                 setCurrentQuestion(random_int);
                 break;
             }
@@ -49,12 +51,12 @@ public class Player {
         this.playerId = playerId;
     }
 
-    public HashSet<Integer> getAnwseredQuestion() {
-        return anwseredQuestion;
+    public Set<Integer> getAnsweredQuestion() {
+        return answeredQuestion;
     }
 
-    public void setAnwseredQuestion(HashSet<Integer> anwseredQuestion) {
-        this.anwseredQuestion = anwseredQuestion;
+    public void setAnsweredQuestion(Set<Integer> answeredQuestion) {
+        this.answeredQuestion = answeredQuestion;
     }
 
     public int getCurrentQuestion() {
@@ -80,4 +82,5 @@ public class Player {
     public void setPlayerPoints(int playerPoints) {
         this.playerPoints = playerPoints;
     }
+
 }
