@@ -82,6 +82,8 @@ public class MainActivity3 extends AppCompatActivity {
                     }
                 }
                 check.setEnabled(false);
+                Players.player1.lossQuestion();
+                Players.player2.lossQuestion();
             }
         });
 
@@ -89,6 +91,9 @@ public class MainActivity3 extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Players.player1.lossQuestion();
+                Players.player2.lossQuestion();
 
                 Intent intent = new Intent();
                 intent.putExtra("KEY_1", Players.player1.getPlayerPoints());
