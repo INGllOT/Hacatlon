@@ -28,7 +28,6 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
     private int amountOfTurns;
     private int firstPlayerPoints;
     private int secondPlayerPoints;
-
     private TextView textViewFirstPlayer;
     private TextView textViewSecondPlayer;
     private TextView time;
@@ -40,6 +39,7 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tictactoe);
 
@@ -177,17 +177,24 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
             public void onFinish() {
                 time.setText("end!");
 
-                Players.player1Win = firstPlayerPoints > secondPlayerPoints;
+                Players.player1win = firstPlayerPoints > secondPlayerPoints;
 
-                System.out.println(Players.player1Win);
+                System.out.println(Players.player1win);
 
                 Intent intent2 = new Intent(TicTacToeActivity.this, QuizActivity.class);
 
-                // it is needed because it opens X activities at once
-                if (!activityStarted) {
+                if (firstPlayerPoints == secondPlayerPoints) {
+                    finish();
+                } else if (firstPlayerPoints > secondPlayerPoints) {
+                    Players.player1win = true;
+                } else if (!activityStarted) {
                     mStartForResult.launch(intent2);
                     activityStarted = true;
+                } else {
+                    Players.player1win = false;
                 }
+
+
 
             }
         }.start();
@@ -208,8 +215,8 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void pointsUpdate() {
-        textViewFirstPlayer.setText("Player 1: " + firstPlayerPoints);
-        textViewSecondPlayer.setText("Player 2: " + secondPlayerPoints);
+        textViewFirstPlayer.setText("" + firstPlayerPoints);
+        textViewSecondPlayer.setText("" + secondPlayerPoints);
     }
 
     private void tableReset() {
@@ -252,4 +259,5 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
         secondPlayerPoints = savedInstanceState.getInt("player2Points");
         firstPlayerTurn = savedInstanceState.getBoolean("player1Turn");
     }
+
 }

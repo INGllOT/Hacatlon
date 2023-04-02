@@ -37,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
 
         answer = findViewById(R.id.answer);
 
-        if (Players.player1Win) {
+        if (Players.player1win) {
             playerTour.setText("PLAYER 1 TOUR");
             currentQuestion = Questions.questions.get(Players.player1.getCurrentQuestion());
             currentAnswer = Questions.answers.get(Players.player1.getCurrentQuestion());
@@ -56,7 +56,7 @@ public class QuizActivity extends AppCompatActivity {
 
         check.setOnClickListener(view -> {
 
-            if (Players.player1Win) {
+            if (Players.player1win) {
                 if (currentAnswer.equals(answer.getText().toString())) {
                     System.out.println(currentQuestion);
                     System.out.println(currentAnswer);

@@ -33,7 +33,7 @@ public class Player {
 
     public void lossQuestion() {
 
-        for (; ; ) {
+        for (;;) {
             random_int = randomNum();
             if (!answeredQuestion.contains(random_int)) {
                 setCurrentQuestion(random_int);

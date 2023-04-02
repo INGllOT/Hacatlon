@@ -1,13 +1,12 @@
 package com.example.hacatlon.participants;
 
-
 public class Players {
 
     public static Player player1 = new Player(1);
     public static Player player2 = new Player(2);
-    public static boolean player1Win = true;
 
     public static String winner = "NONE";
+    public static boolean player1win = false;
 
     public static Player getPlayer1() {
         return player1;
@@ -26,11 +25,11 @@ public class Players {
     }
 
     public static boolean isPlayer1win() {
-        return player1Win;
+        return player1win;
     }
 
     public static void setPlayer1win(boolean player1win) {
-        Players.player1Win = player1win;
+        Players.player1win = player1win;
     }
 
     public static String getWinner() {
