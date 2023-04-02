@@ -58,11 +58,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         // przypisujemy do naszej tablicy każdy przycisk
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                int buttonResID = getResources().getIdentifier("button_" + i + j, "id",getPackageName());
+                int buttonResID = getResources().getIdentifier("button_" + i + j, "id", getPackageName());
                 buttons[i][j] = findViewById(buttonResID);
 
                 // kolory
-                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                int color = Color.argb(255, 162, 143, 112);
+
                 buttons[i][j].setBackgroundColor(color);
 
                 // przypisujemy do każdego przciusku fukcje onClick
@@ -83,29 +84,28 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
 
     // odbieranie danych z 2 aktywnosci
-    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
+    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
 
-                        Intent intent = result.getData();
-                       //  przekazywanie danych do 1 aktywności
-                        int gracz1Intent =   intent.getIntExtra("KEY_1", 99);
-                        int gracz2Intnet =   intent.getIntExtra("KEY_2", 99);
+                Intent intent = result.getData();
+                //  przekazywanie danych do 1 aktywności
+                int gracz1Intent = intent.getIntExtra("KEY_1", 99);
+                int gracz2Intnet = intent.getIntExtra("KEY_2", 99);
 //                intent.putExtra("KEY_1", Players.player1.getPlayerPoints());
 //                intent.putExtra("KEY_2", Players.player2.getPlayerPoints());
                 setResult(Activity.RESULT_OK, intent);
 
-                        finish();
-                    }
-                }
-            });
+                finish();
+            }
+        }
+    });
 
     @Override
     public void onClick(View v) {
 
-        if (!timeRun){
+        if (!timeRun) {
             startTimer();
             timeRun = true;
         }
@@ -145,38 +145,30 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             for (int j = 0; j < 3; j++) {
                 field[i][j] = buttons[i][j].getText().toString();
 
-                // randomowo kolorki
-                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-                buttons[i][j].setBackgroundColor(color);
+//                // randomowo kolorki
+//                int color = Color.argb(255, 162, 143, 112);
+//                buttons[i][j].setBackgroundColor(color);
             }
         }
 
         // sprawdzanie czy ktos wygrał
         for (int i = 0; i < 3; i++) {
-            if (field[i][0].equals(field[i][1])
-                    && field[i][0].equals(field[i][2])
-                    && !field[i][0].equals("")) {
+            if (field[i][0].equals(field[i][1]) && field[i][0].equals(field[i][2]) && !field[i][0].equals("")) {
                 return true;
             }
         }
 
         for (int i = 0; i < 3; i++) {
-            if (field[0][i].equals(field[1][i])
-                    && field[0][i].equals(field[2][i])
-                    && !field[0][i].equals("")) {
+            if (field[0][i].equals(field[1][i]) && field[0][i].equals(field[2][i]) && !field[0][i].equals("")) {
                 return true;
             }
         }
 
-        if (field[0][0].equals(field[1][1])
-                && field[0][0].equals(field[2][2])
-                && !field[0][0].equals("")) {
+        if (field[0][0].equals(field[1][1]) && field[0][0].equals(field[2][2]) && !field[0][0].equals("")) {
             return true;
         }
 
-        if (field[0][2].equals(field[1][1])
-                && field[0][2].equals(field[2][0])
-                && !field[0][2].equals("")) {
+        if (field[0][2].equals(field[1][1]) && field[0][2].equals(field[2][0]) && !field[0][2].equals("")) {
             return true;
         }
 
@@ -204,7 +196,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 if (gracz1PKT == gracz2PKT) {
                     System.out.println(gracz1PKT + " " + gracz2PKT);
                     finish();
-                } else if(gracz1PKT > gracz2PKT) {
+                } else if (gracz1PKT > gracz2PKT) {
                     Players.player1win = true;
                     //gracz1RUNDA ++;
                 } else {
@@ -217,14 +209,14 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 //                intent.putExtra("KEY_1", gracz1RUNDA);
 //                intent.putExtra("KEY_2", gracz2RUNDA);
 
-              //  setResult(Activity.RESULT_OK, intent);
+                //  setResult(Activity.RESULT_OK, intent);
 
                 Intent intent2 = new Intent(MainActivity2.this, MainActivity3.class);
 
                 // musi byc bo otwiera X aktywnosci na raz
                 if (gracz1PKT == gracz2PKT) {
                     finish();
-                } else if (!activityStarted){
+                } else if (!activityStarted) {
                     mStartForResult.launch(intent2);
                     activityStarted = true;
                 }
