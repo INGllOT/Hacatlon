@@ -29,17 +29,29 @@ public class Questions {
 
     public static void addQuestions () {
 
-        questions.add("Najważniejszy");
-        anwserws.add("N");
+        questions.add("Najwyższe nordyckie bóstwo");
+        anwserws.add("Odyn");
 
-        questions.add("Pani Wanów");
-        anwserws.add("P");
+        questions.add("Olbrzym, symbol ognia, oszustwa i psot");
+        anwserws.add("Loki");
 
-        questions.add("AAA");
-        anwserws.add("AAA");
+        questions.add("Opiekowała się koszem ze złotymi jabłkami młodości.");
+        anwserws.add("Idun");
 
-        questions.add("BBB");
-        anwserws.add("BBB");
+        questions.add("Ile jest światów w mitologii nordyckiej? (cyfra)");
+        anwserws.add("9");
+
+        questions.add("Kto rozpoczął ragnarok");
+        anwserws.add("Surtr");
+
+        questions.add("Czy bogowie Nordyccy byli nieśmiertelni?");
+        anwserws.add("Nie");
+
+        questions.add("Starsza dynastia bogów nordyckich");
+        anwserws.add("Wanowie");
+
+
+
 
     }
 }
