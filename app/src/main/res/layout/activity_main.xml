@@ -41,12 +41,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:gravity="center"
             android:fontFamily="@font/uncial_antiqua"
-            android:text="5"
-            android:hint="SET ROUNDS"
+            android:gravity="center"
+            android:hint="enter num of rounds..."
             android:inputType="textPersonName"
+            android:text=""
             android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
             android:textSize="24sp" />
 
         <LinearLayout
