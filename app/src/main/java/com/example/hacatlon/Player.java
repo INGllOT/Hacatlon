@@ -21,7 +21,6 @@ public class Player {
         int min = 0; // Minimum value of range
         int max = Questions.questions.size() - 1 ; // Maximum value of range
         int num = (int)Math.floor(Math.random() * (max - min + 1) + min);
-        System.out.println("losss number " + num);
         return (int)Math.floor(Math.random() * (max - min + 1) + min);
     }
 
@@ -32,7 +31,6 @@ public class Player {
 
         for(;;) {
              random_int = randomNum();
-            //System.out.println("question number " + random_int);
             if(!anwseredQuestion.contains(random_int)){
                 setCurrentQuestion(random_int);
                 break;

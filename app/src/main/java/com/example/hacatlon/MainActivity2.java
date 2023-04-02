@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
@@ -134,7 +135,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         } else {
             kolejPierwszegoGracza = !kolejPierwszegoGracza;
         }
-
     }
 
     private boolean checkForWin() {
@@ -201,16 +201,16 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             public void onFinish() {
                 time.setText("koniec!");
 
-                if (gracz1PKT > gracz2PKT){
+                if (gracz1PKT == gracz2PKT) {
+                    System.out.println(gracz1PKT + " " + gracz2PKT);
+                    finish();
+                } else if(gracz1PKT > gracz2PKT) {
                     Players.player1win = true;
                     //gracz1RUNDA ++;
-                }
-                else {
+                } else {
                     Players.player1win = false;
-                   // gracz2RUNDA ++;
+                    // gracz2RUNDA ++;
                 }
-
-                System.out.println(Players.player1win);
 
                 // przekazywanie danych do 1 aktywności
 //                Intent intent = new Intent();
@@ -221,13 +221,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
                 Intent intent2 = new Intent(MainActivity2.this, MainActivity3.class);
 
-
                 // musi byc bo otwiera X aktywnosci na raz
-                if(!activityStarted){
+                if (gracz1PKT == gracz2PKT) {
+                    finish();
+                } else if (!activityStarted ){
                     mStartForResult.launch(intent2);
                     activityStarted = true;
                 }
-
                 //finish();
             }
         }.start();
@@ -257,7 +257,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 buttons[i][j].setText("");
             }
         }
-
         liczbaRuchów = 0;
         kolejPierwszegoGracza = true;
     }

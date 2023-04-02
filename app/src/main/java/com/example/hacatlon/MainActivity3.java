@@ -60,31 +60,22 @@ public class MainActivity3 extends AppCompatActivity {
                 if(Players.player1win) {
                   //  System.out.println(Players.player1.currentQuestion + " " + Questions.questions.size());
                     if(currentAnswer.equals(answer.getText().toString())) {
-                        System.out.println(currentQuestion);
-                        System.out.println(currentAnswer);
                         result.setText("RIGHT !!!");
                         Players.player1.anwseredQuestion.add(indexOfQuestion);
                         Players.player1.addPoint();
-                        System.out.println(Players.player1.getPlayerPoints());
                     } else {
-                        System.out.println(currentQuestion);
-                        System.out.println(currentAnswer);
                         result.setText("WRONG !!!");
                     }
 
                 } else {
-                    System.out.println(Players.player2.currentQuestion  +" " + Questions.questions.size());
+
                     if(currentAnswer.equals(answer.getText().toString())) {
                         result.setText("RIGHT !!!");
-                        System.out.println(currentQuestion);
-                        System.out.println(currentAnswer);
                         Players.player2.anwseredQuestion.add(indexOfQuestion);
                         Players.player2.addPoint();
                         System.out.println(Players.player2.getPlayerPoints());
                     } else {
                         result.setText("WRONG !!!");
-                        System.out.println(currentQuestion);
-                        System.out.println(currentAnswer);
                     }
                 }
                 check.setEnabled(false);

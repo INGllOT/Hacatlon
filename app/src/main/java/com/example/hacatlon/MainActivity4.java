@@ -24,8 +24,6 @@ public class MainActivity4 extends AppCompatActivity {
 
         result.setText(Players.winner.toString());
 
-
-
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
