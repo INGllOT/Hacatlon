@@ -114,10 +114,11 @@
                 android:ems="10"
                 android:fontFamily="@font/uncial_antiqua"
                 android:gravity="center_horizontal"
+                android:hint="enter text... "
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="enter text... "
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
 
         </LinearLayout>
 
