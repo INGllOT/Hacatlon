@@ -21,21 +21,21 @@ public class Player {
 
     public int randomNum() {
         int min = 0; // Minimum value of range
-        int max = Questions.questions.size() - 1 ; // Maximum value of range
-        int num = (int)Math.floor(Math.random() * (max - min + 1) + min);
-        System.out.println("losss number " + num);
-        return (int)Math.floor(Math.random() * (max - min + 1) + min);
+        int max = Questions.questions.size() - 1; // Maximum value of range
+        int num = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        System.out.println("loss number " + num);
+        return (int) Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     public void addPoint() {
-        playerPoints ++;
+        playerPoints++;
     }
+
     public void lossQuestion() {
 
-        for(;;) {
-             random_int = randomNum();
-            //System.out.println("question number " + random_int);
-            if(!answeredQuestion.contains(random_int)){
+        for (; ; ) {
+            random_int = randomNum();
+            if (!answeredQuestion.contains(random_int)) {
                 setCurrentQuestion(random_int);
                 break;
             }
@@ -43,6 +43,7 @@ public class Player {
         }
 
     }
+
     public int getPlayerId() {
         return playerId;
     }

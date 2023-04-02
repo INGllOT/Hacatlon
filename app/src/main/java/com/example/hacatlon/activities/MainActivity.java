@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int statsFirstPlayer;
     private int statsSecondPlayer;
-    private int rounds = 1;
+    private final int rounds = 1;
     private String winner = "";
 
     @Override
@@ -46,69 +42,58 @@ public class MainActivity extends AppCompatActivity {
 
         // receive data from final activity
         ActivityResultLauncher<Intent> endResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent intent = result.getData();
-                            firstPlayer.setText("Gracz1: " + Players.player1.getPlayerPoints());
-                            secondPlayer.setText("Gracz2: " + Players.player2.getPlayerPoints());
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
+                        firstPlayer.setText("Player 1: " + Players.player1.getPlayerPoints());
+                        secondPlayer.setText("Player 2: " + Players.player2.getPlayerPoints());
 
-                        }
                     }
                 });
 
         // receive data from second activity
         ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent intent = result.getData();
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
 
-                            int gracz1Intent =   intent.getIntExtra("KEY_1", 99);
-                            int gracz2Intnet =   intent.getIntExtra("KEY_2", 99);
-                            statsFirstPlayer += gracz1Intent;
-                            statsSecondPlayer += gracz2Intnet;
+                        assert intent != null;
+                        int firstPlayerIntent = intent.getIntExtra("KEY_1", 99);
+                        int secondPlayerIntnet = intent.getIntExtra("KEY_2", 99);
+                        statsFirstPlayer += firstPlayerIntent;
+                        statsSecondPlayer += secondPlayerIntnet;
 
-                          //  Toast.makeText(MainActivity.this, "gracz 1 "+ gracz1Intent + " " + "gracz 2 "+ gracz1Intent, Toast.LENGTH_LONG).show();
-                            firstPlayer.setText("Gracz1: " + Players.player1.getPlayerPoints());
-                            secondPlayer.setText("Gracz2: " + Players.player2.getPlayerPoints());
+                        firstPlayer.setText("Player 1: " + Players.player1.getPlayerPoints());
+                        secondPlayer.setText("Player 2: " + Players.player2.getPlayerPoints());
 
-                            if(Players.player1.getPlayerPoints() == rounds) {
-                                winner = "PLAYER 1";
-                                Players.winner = winner;
-                                Intent intent2 = new Intent(MainActivity.this, ResultActivity.class);
-                                endResult.launch(intent2);
-                            } else if (Players.player2.getPlayerPoints() == rounds) {
-                                winner = "PLAYER 2";
-                                Players.winner = winner;
-                                Intent intent2 = new Intent(MainActivity.this, ResultActivity.class);
-                                endResult.launch(intent2);
-                            }
+                        if (Players.player1.getPlayerPoints() == rounds) {
+                            winner = "PLAYER 1";
+                            Players.winner = winner;
+                            Intent intent2 = new Intent(MainActivity.this, ResultActivity.class);
+                            endResult.launch(intent2);
+                        } else if (Players.player2.getPlayerPoints() == rounds) {
+                            winner = "PLAYER 2";
+                            Players.winner = winner;
+                            Intent intent2 = new Intent(MainActivity.this, ResultActivity.class);
+                            endResult.launch(intent2);
                         }
+
                     }
                 });
 
 
-        // otiweranie 2 aktywnosci
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TicTacToeActivity.class);
-                mStartForResult.launch(intent);
-            }
+        // open second activity
+        start.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, TicTacToeActivity.class);
+            mStartForResult.launch(intent);
         });
 
-        // resetowanie
-        reset.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Players.player1.setPlayerPoints(0);
-                Players.player2.setPlayerPoints(0);
-                firstPlayer.setText("Gracz1 : ");
-                secondPlayer.setText("Gracz2 : ");
-            }
+        // reset
+        reset.setOnClickListener((view -> {
+            Players.player1.setPlayerPoints(0);
+            Players.player2.setPlayerPoints(0);
+            firstPlayer.setText("Player 1 : ");
+            secondPlayer.setText("Player 2 : ");
         }));
     }
 

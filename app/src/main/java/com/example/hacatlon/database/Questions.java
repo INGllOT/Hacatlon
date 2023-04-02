@@ -6,7 +6,7 @@ import java.util.List;
 public class Questions {
 
     public static List<String> questions = new ArrayList<>();
-    public static  List<String> answers = new ArrayList<>();
+    public static List<String> answers = new ArrayList<>();
 
 
     public List<String> getQuestions() {
@@ -25,7 +25,7 @@ public class Questions {
         this.answers = answers;
     }
 
-    public static void addQuestions () {
+    public static void addQuestions() {
 
         questions.add("Najważniejszy");
         answers.add("N");

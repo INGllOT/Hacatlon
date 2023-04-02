@@ -25,23 +25,18 @@ public class ResultActivity extends AppCompatActivity {
         result = findViewById(R.id.winner);
         playAgain = findViewById(R.id.playagain);
 
-        result.setText(Players.winner.toString());
+        result.setText(Players.winner);
 
+        playAgain.setOnClickListener(view -> {
+            Players.player1.setPlayerPoints(0);
+            Players.player2.setPlayerPoints(0);
 
+            Intent intent = new Intent();
+            intent.putExtra("KEY_1", Players.player1.getPlayerPoints());
+            intent.putExtra("KEY_2", Players.player2.getPlayerPoints());
 
-        playAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Players.player1.setPlayerPoints(0);
-                Players.player2.setPlayerPoints(0);
-
-                Intent intent = new Intent();
-                intent.putExtra("KEY_1", Players.player1.getPlayerPoints());
-                intent.putExtra("KEY_2", Players.player2.getPlayerPoints());
-
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
+            setResult(Activity.RESULT_OK, intent);
+            finish();
         });
     }
 }

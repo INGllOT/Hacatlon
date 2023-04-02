@@ -1,9 +1,8 @@
 package com.example.hacatlon.activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -24,25 +23,17 @@ import java.util.Random;
 
 public class TicTacToeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button[][] buttons = new Button[3][3];
+    private final Button[][] buttons = new Button[3][3];
+    private boolean firstPlayerTurn = true;
+    private int amountOfTurns;
+    private int firstPlayerPoints;
+    private int secondPlayerPoints;
 
-    private boolean kolejPierwszegoGracza = true;
-
-    private int liczbaRuchów;
-
-    private int gracz1PKT;
-    private int gracz2PKT;
-
-    private int gracz1RUNDA;
-    private int gracz2RUNDA;
-
-    private TextView textViewGracz1;
-    private TextView textViewGracz2;
-
-    public TextView time;
-    boolean timeRun = false;
-
-    boolean activityStarted = false;
+    private TextView textViewFirstPlayer;
+    private TextView textViewSecondPlayer;
+    private TextView time;
+    private boolean timeRun = false;
+    private boolean activityStarted = false;
 
     Random rnd = new Random();
 
@@ -52,22 +43,21 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tictactoe);
 
-        textViewGracz1 = findViewById(R.id.text_view_p1);
-        textViewGracz2 = findViewById(R.id.text_view_p2);
+        textViewFirstPlayer = findViewById(R.id.text_view_p1);
+        textViewSecondPlayer = findViewById(R.id.text_view_p2);
         time = findViewById(R.id.text_view_time);
 
-
-        // przypisujemy do naszej tablicy każdy przycisk
+        // assign to our array every button
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                int buttonResID = getResources().getIdentifier("button_" + i + j, "id",getPackageName());
+                int buttonResID = getResources().getIdentifier("button_" + i + j, "id", getPackageName());
                 buttons[i][j] = findViewById(buttonResID);
 
-                // kolory
+                // colors
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 buttons[i][j].setBackgroundColor(color);
 
-                // przypisujemy do każdego przciusku fukcje onClick
+                // assign to each button onClick function
                 buttons[i][j].setOnClickListener(this);
 
             }
@@ -75,67 +65,54 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
         }
 
         Button buttonReset = findViewById(R.id.button_reset);
-        buttonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetujGre();
-            }
-        });
+        buttonReset.setOnClickListener(v -> resetTheGame());
     }
 
-
-    // odbieranie danych z 2 aktywnosci
+    // receive data from second activity
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
 
-                        Intent intent = result.getData();
-                       //  przekazywanie danych do 1 aktywności
-                        int gracz1Intent =   intent.getIntExtra("KEY_1", 99);
-                        int gracz2Intnet =   intent.getIntExtra("KEY_2", 99);
-//                intent.putExtra("KEY_1", Players.player1.getPlayerPoints());
-//                intent.putExtra("KEY_2", Players.player2.getPlayerPoints());
-                setResult(Activity.RESULT_OK, intent);
+                    Intent intent = result.getData();
 
-                        finish();
-                    }
+                    setResult(Activity.RESULT_OK, intent);
+
+                    finish();
                 }
             });
 
     @Override
     public void onClick(View v) {
 
-        if (!timeRun){
+        if (!timeRun) {
             startTimer();
             timeRun = true;
         }
 
-        // sprawdzanie czy buton nie jest "klikniety"
+        // check if button is not "clicked"
         if (!((Button) v).getText().toString().equals("")) {
             return;
         }
 
-        // dodawanie X", "O"
-        if (kolejPierwszegoGracza) {
+        // add X and O
+        if (firstPlayerTurn) {
             ((Button) v).setText("X");
         } else {
             ((Button) v).setText("O");
         }
 
-        liczbaRuchów++;
+        amountOfTurns++;
 
         if (checkForWin()) {
-            if (kolejPierwszegoGracza) {
-                player1Wygrywa();
+            if (firstPlayerTurn) {
+                firstPlayerWins();
             } else {
-                player2Wygrywa();
+                secondPlayerWins();
             }
-        } else if (liczbaRuchów == 9) {
-            remis();
+        } else if (amountOfTurns == 9) {
+            draw();
         } else {
-            kolejPierwszegoGracza = !kolejPierwszegoGracza;
+            firstPlayerTurn = !firstPlayerTurn;
         }
 
     }
@@ -143,18 +120,18 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
     private boolean checkForWin() {
         String[][] field = new String[3][3];
 
-        // za kazdym wywolaniem metody petla pobiera "x" "o"
+        // every method invocation loop gets "x" and "o"
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 field[i][j] = buttons[i][j].getText().toString();
 
-                // randomowo kolorki
+                // random colors
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 buttons[i][j].setBackgroundColor(color);
             }
         }
 
-        // sprawdzanie czy ktos wygrał
+        // check if someone won
         for (int i = 0; i < 3; i++) {
             if (field[i][0].equals(field[i][1])
                     && field[i][0].equals(field[i][2])
@@ -177,121 +154,102 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
             return true;
         }
 
-        if (field[0][2].equals(field[1][1])
+        return field[0][2].equals(field[1][1])
                 && field[0][2].equals(field[2][0])
-                && !field[0][2].equals("")) {
-            return true;
-        }
-
-        return false;
+                && !field[0][2].equals("");
     }
 
-    // gracz 1 win
-    private void player1Wygrywa() {
-        gracz1PKT++;
-        Toast.makeText(this, "Gracz 1 wygrywa!", Toast.LENGTH_SHORT).show();
-        aktualizacjaPKT();
-        resetTablicy();
+    // first player wins
+    private void firstPlayerWins() {
+        firstPlayerPoints++;
+        Toast.makeText(this, "First player wins!", Toast.LENGTH_SHORT).show();
+        pointsUpdate();
+        tableReset();
     }
 
     public void startTimer() {
         new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                time.setText("czas : " + millisUntilFinished / 1000);
+                time.setText("time : " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-                time.setText("koniec!");
+                time.setText("end!");
 
-                if (gracz1PKT > gracz2PKT){
-                    Players.player1Win = true;
-                    //gracz1RUNDA ++;
-                }
-                else {
-                    Players.player1Win = false;
-                   // gracz2RUNDA ++;
-                }
+                Players.player1Win = firstPlayerPoints > secondPlayerPoints;
 
                 System.out.println(Players.player1Win);
 
-                // przekazywanie danych do 1 aktywności
-//                Intent intent = new Intent();
-//                intent.putExtra("KEY_1", gracz1RUNDA);
-//                intent.putExtra("KEY_2", gracz2RUNDA);
-
-              //  setResult(Activity.RESULT_OK, intent);
-
                 Intent intent2 = new Intent(TicTacToeActivity.this, QuizActivity.class);
 
-
-                // musi byc bo otwiera X aktywnosci na raz
-                if(!activityStarted){
+                // it is needed because it opens X activities at once
+                if (!activityStarted) {
                     mStartForResult.launch(intent2);
                     activityStarted = true;
                 }
 
-                //finish();
             }
         }.start();
     }
 
-    //gracz 2 win
-    private void player2Wygrywa() {
-        gracz2PKT++;
-        Toast.makeText(this, "Gracz 2 wygrywa!", Toast.LENGTH_SHORT).show();
-        aktualizacjaPKT();
-        resetTablicy();
+
+    // second player wins
+    private void secondPlayerWins() {
+        secondPlayerPoints++;
+        Toast.makeText(this, "Second player wins!", Toast.LENGTH_SHORT).show();
+        pointsUpdate();
+        tableReset();
     }
 
-    private void remis() {
-        Toast.makeText(this, "REMIS!", Toast.LENGTH_SHORT).show();
-        resetTablicy();
+    private void draw() {
+        Toast.makeText(this, "DRAW!", Toast.LENGTH_SHORT).show();
+        tableReset();
     }
 
-    private void aktualizacjaPKT() {
-        textViewGracz1.setText("Player 1: " + gracz1PKT);
-        textViewGracz2.setText("Player 2: " + gracz2PKT);
+    private void pointsUpdate() {
+        textViewFirstPlayer.setText("Player 1: " + firstPlayerPoints);
+        textViewSecondPlayer.setText("Player 2: " + secondPlayerPoints);
     }
 
-    private void resetTablicy() {
+    private void tableReset() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
             }
         }
 
-        liczbaRuchów = 0;
-        kolejPierwszegoGracza = true;
+        amountOfTurns = 0;
+        firstPlayerTurn = true;
     }
 
-    //reset gry
-    private void resetujGre() {
-        gracz1PKT = 0;
-        gracz2PKT = 0;
-        aktualizacjaPKT();
-        resetTablicy();
+    // reset of the game
+    private void resetTheGame() {
+        firstPlayerPoints = 0;
+        secondPlayerPoints = 0;
+        pointsUpdate();
+        tableReset();
         startTimer();
     }
 
-    // telefon poziomo
+    // inverted phone
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt("roundCount", liczbaRuchów);
-        outState.putInt("player1Points", gracz1PKT);
-        outState.putInt("player2Points", gracz2PKT);
-        outState.putBoolean("player1Turn", kolejPierwszegoGracza);
+        outState.putInt("roundCount", amountOfTurns);
+        outState.putInt("player1Points", firstPlayerPoints);
+        outState.putInt("player2Points", secondPlayerPoints);
+        outState.putBoolean("player1Turn", firstPlayerTurn);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        liczbaRuchów = savedInstanceState.getInt("roundCount");
-        gracz1PKT = savedInstanceState.getInt("player1Points");
-        gracz2PKT = savedInstanceState.getInt("player2Points");
-        kolejPierwszegoGracza = savedInstanceState.getBoolean("player1Turn");
+        amountOfTurns = savedInstanceState.getInt("roundCount");
+        firstPlayerPoints = savedInstanceState.getInt("player1Points");
+        secondPlayerPoints = savedInstanceState.getInt("player2Points");
+        firstPlayerTurn = savedInstanceState.getBoolean("player1Turn");
     }
 }
