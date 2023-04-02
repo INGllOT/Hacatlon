@@ -168,7 +168,7 @@ public class TicTacToeActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void startTimer() {
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 time.setText("time : " + millisUntilFinished / 1000);
