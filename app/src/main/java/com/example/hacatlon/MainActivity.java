@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
                             statsGracz2 += gracz2Intnet;
 
                           //  Toast.makeText(MainActivity.this, "gracz 1 "+ gracz1Intent + " " + "gracz 2 "+ gracz1Intent, Toast.LENGTH_LONG).show();
-                            gracz1.setText("Gracz1: " + Players.player1.getPlayerPoints());
-                            gracz2.setText("Gracz2: " + Players.player2.getPlayerPoints());
+                            gracz1.setText("P1: " + Players.player1.getPlayerPoints());
+                            gracz2.setText("P2: " + Players.player2.getPlayerPoints());
 
                             if(Players.player1.getPlayerPoints() == rounds) {
                                 winner = "PLAYER 1 WON";
