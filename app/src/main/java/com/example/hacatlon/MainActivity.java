@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent intent = result.getData();
-                            gracz1.setText("Gracz1: " + Players.player1.getPlayerPoints());
-                            gracz2.setText("Gracz2: " + Players.player2.getPlayerPoints());
+                            gracz1.setText("P1: " + Players.player1.getPlayerPoints());
+                            gracz2.setText("P2: " + Players.player2.getPlayerPoints());
 
                         }
                     }
@@ -75,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
                             gracz2.setText("Gracz2: " + Players.player2.getPlayerPoints());
 
                             if(Players.player1.getPlayerPoints() == rounds) {
-                                winner = "PLAYER 1";
+                                winner = "PLAYER 1 WON";
                                 Players.winner = winner;
                                 Intent intent2 = new Intent(MainActivity.this, MainActivity4.class);
                                 endResult.launch(intent2);
                             } else if (Players.player2.getPlayerPoints() == rounds) {
-                                winner = "PLAYER 2";
+                                winner = "PLAYER 2 WON";
                                 Players.winner = winner;
                                 Intent intent2 = new Intent(MainActivity.this, MainActivity4.class);
                                 endResult.launch(intent2);
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Players.player1.setPlayerPoints(0);
                 Players.player2.setPlayerPoints(0);
-                gracz1.setText("Gracz1 : ");
-                gracz2.setText("Gracz2 : ");
+                gracz1.setText("P1 : ");
+                gracz2.setText("P2 : ");
             }
         }));
     }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkbrown"
     android:orientation="vertical"
-    android:background="@color/cream"
     tools:context=".MainActivity3">
 
     <TextView
@@ -13,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
-        android:text="GAME NAME"
-        android:textColor="@color/white"
-        android:textSize="36sp" />
+        android:fontFamily="@font/uncial_antiqua"
+        android:text="Axe &amp; Shield"
+        android:textColor="@color/header_text_color"
+        android:textSize="56sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,13 +23,16 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/uncial_antiqua"
             android:text=""
+            android:textColor="@color/header_text_color"
             android:textSize="24sp" />
 
         <TextView
@@ -38,25 +41,36 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:text="Payer"
-            android:textSize="24sp" />
+            android:fontFamily="@font/uncial_antiqua"
+            android:text="Player"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+
+            />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/uncial_antiqua"
             android:text="Question"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
+
 
         <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:fontFamily="@font/uncial_antiqua"
             android:gravity="center_horizontal"
+            android:inputType="textPersonName"
             android:text=" "
+            android:textColor="#FFFFFF"
+
             />
 
         <TextView
@@ -73,10 +87,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:gravity="center_horizontal"
+            android:inputType="textPersonName"
             android:text=""
-            />
+            android:textColor="#FFFFFF" />
+
+
         <TextView
             android:id="@+id/round"
             android:layout_width="wrap_content"
@@ -86,13 +102,15 @@
             android:text=""
             android:textSize="24sp" />
 
+
         <Button
             android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/button_background_color"
+            android:fontFamily="@font/uncial_antiqua"
             android:text="CHECK"
             android:textSize="36sp" />
 
@@ -101,11 +119,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/button_background_color"
+            android:fontFamily="@font/uncial_antiqua"
             android:text="NEXT"
             android:textSize="36sp" />
-
 
 
     </LinearLayout>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkbrown"
     android:orientation="vertical"
-    android:background="@color/cream"
     tools:context=".MainActivity4">
 
     <TextView
@@ -13,17 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
-        android:text="GAME NAME"
-        android:textColor="@color/white"
-        android:textSize="36sp" />
+        android:fontFamily="@font/uncial_antiqua"
+        android:text="Axe &amp; Shield"
+        android:textColor="@color/header_text_color"
+        android:textSize="56sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/darkbrown"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@color/cream">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/result"
             android:layout_width="wrap_content"
@@ -39,8 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:text="Payer"
-            android:textSize="24sp" />
+            android:fontFamily="@font/uncial_antiqua"
+            android:text="Player"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,9 +58,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:gravity="center_horizontal"
+            android:inputType="textPersonName"
             android:text=" "
+            android:fontFamily="@font/uncial_antiqua"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -95,9 +100,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:backgroundTint="@color/button_background_color"
+            android:fontFamily="@font/uncial_antiqua"
             android:text="PLAY AGAIN"
             android:textSize="36sp" />
-
 
 
     </LinearLayout>
