@@ -27,6 +27,9 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        Players.player1.lossQuestion();
+        Players.player2.lossQuestion();
+
         check = findViewById(R.id.check);
         next = findViewById(R.id.next);
 

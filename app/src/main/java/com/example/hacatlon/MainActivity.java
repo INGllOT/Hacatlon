@@ -22,21 +22,24 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     Button start, reset;
-    TextView gracz1, gracz2;
+    TextView gracz1, gracz2, roundsPase;
 
     int statsGracz1 ;
     int statsGracz2 ;
-    int rounds = 1;
+    int rounds = 5;
+    String roundValidation = "";
     String winner = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        roundsPase = findViewById(R.id.round);
         start = findViewById(R.id.startId);
         reset = findViewById(R.id.resetId);
 
         Questions.addQuestions();
+
 
         gracz1 = findViewById(R.id.gracz1);
         gracz2 = findViewById(R.id.gracz2);
@@ -94,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                roundValidation = roundsPase.getText().toString();
+                roundValidation = roundValidation.replaceAll(" ", "");
+                rounds = Integer.parseInt(roundValidation);
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                 mStartForResult.launch(intent);
             }

@@ -26,13 +26,26 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/round"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="55dp"
             android:fontFamily="@font/uncial_antiqua"
-            android:text="Rounds: 5"
+            android:text="Rounds"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:fontFamily="@font/uncial_antiqua"
+            android:text="5"
+            android:hint="SET ROUNDS"
+            android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
